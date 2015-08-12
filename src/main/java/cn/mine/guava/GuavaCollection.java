@@ -6,10 +6,11 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-class User {
+class User implements Comparable<User>{
     public long id;
     public String name;
 
@@ -28,6 +29,10 @@ class User {
                 .add("name",name)
                 .omitNullValues()
                 .toString();
+    }
+
+    public int compareTo(User other) {
+        return ComparisonChain.start().compare(this.id,other.id).result();
     }
 }
 
@@ -129,6 +134,12 @@ public class GuavaCollection {
         diff.entriesInCommon();     //{1=user1}
         diff.entriesOnlyOnLeft();   //{2=user2}
         diff.entriesOnlyOnRight();  //{3=user3}
+
+
+        List<User> list10 = Lists.newArrayList(list4);
+        Collections.sort(list10);
+        System.out.println(list10);
+
 
 
     }
